@@ -30,15 +30,15 @@ data_dict = {"Oil Temprature": oil_temps,
 def update_old_values(times, oil_temps, intake_temps, coolant_temps, rpms, speeds, throttle_pos):
     times.append(time.time())
     if len(times) == 1:
-        oil_temps.append(random.randrange(180,230))
-        intake_temps.append(random.randrange(90,115))
-        coolant_temps.append(random.randrange(170,220))
-        rpms.append(random.randrange(1000,9500))
-        speeds.append(random.randrange(30,140))
-        throttle_pos.append(random.randrange(10,90))
+        oil_temps.append(random.randrange(180, 230))
+        intake_temps.append(random.randrange(90, 115))
+        coolant_temps.append(random.randrange(170, 220))
+        rpms.append(random.randrange(1000, 9500))
+        speeds.append(random.randrange(30, 140))
+        throttle_pos.append(random.randrange(10, 90))
     else:
         for data_of_interest in [oil_temps, intake_temps, coolant_temps, rpms, speeds, throttle_pos]:
-            data_of_interest.append(data_of_interest[-1]+data_of_interest[-1]*random.uniform(-0.0001,0.0001))
+            data_of_interest.append(data_of_interest[-1]+data_of_interest[-1]*random.uniform(-0.0001, 0.0001))
     return times, oil_temps, intake_temps, coolant_temps, rpms, speeds, throttle_pos
 
 
