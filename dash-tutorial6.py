@@ -55,6 +55,15 @@ with open('./data/negative.txt', 'r') as f:
 
 
 def print_score(type, postivie_correct, positive_sample, negative_correct, negative_sample):
+    '''
+    This function prints accuracy result for various sentiment methods
+    :param type: string for the method used
+    :param postivie_correct: count of the positive word identified
+    :param positive_sample: total count of words in sample
+    :param negative_correct: count of the negative word identified
+    :param negative_sample: total count of words in sample
+    :return: none
+    '''
     print('*' * 80)
     print('Positive accuracy with {} = {}% via {} samples.'.format(type, postivie_correct / positive_sample * 100.00,
                                                                    positive_sample))
