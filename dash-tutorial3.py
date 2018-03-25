@@ -6,7 +6,7 @@ import dash_html_components as html
 import quandl
 from dash.dependencies import Input, Output
 
-quandl.ApiConfig.api_key = 'QrkyFyJnoyC-SMpNC_ca'
+quandl.ApiConfig.api_key = '<enter your config key>'
 app = dash.Dash()
 
 app.layout = html.Div(children=[
@@ -44,4 +44,4 @@ def update_graph(input_data):
 if __name__ == '__main__':
     app.run_server(debug=True)
 
-#QrkyFyJnoyC-SMpNC_ca
+
