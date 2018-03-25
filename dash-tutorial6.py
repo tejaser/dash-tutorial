@@ -16,7 +16,7 @@ with open('./data/positive.txt', 'r') as f:
     for line in f.read().split('\n'):
         analysis = TextBlob(line)
         vs = analyzer.polarity_scores(line)
-        if analysis.sentiment.subjectivity > 0.8:
+        if analysis.sentiment.polarity >= 0.00001:
             if analysis.sentiment.polarity > 0:
                 pos_correct_text += 1
             pos_count_text += 1
@@ -25,7 +25,7 @@ with open('./data/positive.txt', 'r') as f:
                 pos_correct_vader += 1
             pos_count_vader += 1
         if not vs['neg'] > 0.1:
-            if vs['pos'] - vs['neg'] >= 0:
+            if vs['pos'] - vs['neg'] > 0:
                 pos_correct_opt += 1
             pos_count_opt += 1
 
@@ -40,7 +40,7 @@ with open('./data/negative.txt', 'r') as f:
     for line in f.read().split('\n'):
         analysis = TextBlob(line)
         vs = analyzer.polarity_scores(line)
-        if analysis.sentiment.subjectivity > 0.8:
+        if analysis.sentiment.polarity <= -0.00001:
             if analysis.sentiment.polarity <= 0:
                 neg_correct_text += 1
             neg_count_text += 1
