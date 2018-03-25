@@ -103,5 +103,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-#config file
+# config file
 *.cfg
+
+# sqllite3 database
+*.db
+*.db*
