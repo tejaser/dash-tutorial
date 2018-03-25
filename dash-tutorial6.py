@@ -8,6 +8,9 @@ pos_count_text = 0
 pos_correct_text = 0
 pos_count_vader = 0
 pos_correct_vader = 0
+pos_count_opt = 0
+pos_correct_opt = 0
+
 
 with open('./data/positive.txt', 'r') as f:
     for line in f.read().split('\n'):
@@ -21,11 +24,17 @@ with open('./data/positive.txt', 'r') as f:
             if vs['compound'] > 0:
                 pos_correct_vader += 1
             pos_count_vader += 1
+        if not vs['neg'] > 0.1:
+            if vs['pos'] - vs['neg'] >= 0:
+                pos_correct_opt += 1
+            pos_count_opt += 1
 
 neg_count_text = 0
 neg_correct_text = 0
 neg_count_vader = 0
 neg_correct_vader = 0
+neg_count_opt = 0
+neg_correct_opt = 0
 
 with open('./data/negative.txt', 'r') as f:
     for line in f.read().split('\n'):
@@ -39,11 +48,20 @@ with open('./data/negative.txt', 'r') as f:
             if vs['compound'] <= 0:
                 neg_correct_vader += 1
             neg_count_vader += 1
+        if not vs['pos'] > 0.1:
+            if vs['pos'] - vs['neg'] <= 0:
+                neg_correct_opt += 1
+            neg_count_opt += 1
 
-print('*'*80)
-print('Positive accuracy with TextBlob = {}% via {} samples.'.format(pos_correct_text/pos_count_text*100.00, pos_count_text))
-print('Negative accuracy with TextBlob = {}% via {} samples.'.format(neg_correct_text/neg_count_text*100.00, neg_count_text))
-print('*'*80)
-print('Positive accuracy with vaderSentiment = {}% via {} samples.'.format(pos_correct_vader/pos_count_vader*100.00, pos_count_vader))
-print('Negative accuracy with vaderSentiment = {}% via {} samples.'.format(neg_correct_vader/neg_count_vader*100.00, neg_count_vader))
-print('*'*80)
+
+def print_score(type, postivie_correct, positive_sample, negative_correct, negative_sample):
+    print('*' * 80)
+    print('Positive accuracy with {} = {}% via {} samples.'.format(type, postivie_correct / positive_sample * 100.00,
+                                                                   positive_sample))
+    print('Negative accuracy with {} = {}% via {} samples.'.format(type, negative_correct / negative_sample * 100.00,
+                                                                   negative_sample))
+
+
+print_score('TextBlob', pos_correct_text, pos_count_text,neg_correct_text,neg_count_text)
+print_score('VaderSentiment', pos_correct_vader, pos_count_vader, neg_correct_vader, neg_count_vader)
+print_score('VaderOptimized', pos_correct_opt, pos_count_opt, neg_correct_opt, neg_count_opt)
